@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tsukoymi Store Ltd - Seller Digital Termurah & Lengkap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* Side Menu Styles */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #0066cc;
+            transition: all 0.3s ease;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            z-index: 150;
+            transition: right 0.3s ease;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
+        }
+        
+        .side-menu.active {
+            right: 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 140;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .side-menu ul {
+            list-style: none;
+        }
+        
+        .side-menu ul li {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .side-menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            display: block;
+            padding: 10px 0;
+            transition: color 0.3s;
+        }
+        
+        .side-menu ul li a:hover {
+            color: #0066cc;
+        }
+        
+        .dropdown-toggle {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .dropdown-toggle::after {
+            content: "+";
+            font-size: 20px;
+        }
+        
+        .dropdown-toggle.active::after {
+            content: "-";
+        }
+        
+        .dropdown-menu {
+            display: none;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        /* Image Slider Styles */
+        .slider-container {
+            width: 100%;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            max-height: 500px;
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slide {
+            min-width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .slider-dot.active {
+            background-color: #fff;
+        }
+        
+        .slider-prev, .slider-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .slider-prev {
+            left: 20px;
+        }
+        
+        .slider-next {
+            right: 20px;
+        }
+        
+        .hero {
+            background-color: #0066cc;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .products {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .products h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .product-price {
+            color: #0066cc;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-btn {
+            display: block;
+            width: 100%;
+            background-color: #0066cc;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .product-btn:hover {
+            background-color: #004c99;
+        }
+        
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+        
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #555;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: row;
+            }
+            
+            .slider-prev, .slider-next {
+                padding: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .slide {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Tsukoyomi Store .Ltd</a>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <ul>
+            <li><a href="#">Beranda</a></li>
+            <li>
+                <a href="#">Produk</a>
+                <span class="dropdown-toggle"></span>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Top Up Game</a></li>
+                    <li><a href="#">Voucher Aplikasi</a></li>
+                    <li><a href="#">Pulsa & Paket Data</a></li>
+                    <li><a href="#">E-Money</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Kontak</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x500/0066cc/ffffff?text=Promo+DeyuStore+1')"></div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x500/cc0066/ffffff?text=Promo+DeyuStore+2')"></div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/1920x500/00cc66/ffffff?text=Promo+DeyuStore+3')"></div>
+        </div>
+        <button class="slider-prev">&#10094;</button>
+        <button class="slider-next">&#10095;</button>
+        <div class="slider-nav">
+            <span class="slider-dot active"></span>
+            <span class="slider-dot"></span>
+            <span class="slider-dot"></span>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Pusat Produk Digital Terpercaya</h1>
+            <p>Dapatkan berbagai macam produk digital dengan harga terbaik dan pelayanan 24 jam</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Mengapa Memilih Kami?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Proses Cepat</h3>
+                    <p>Proses pengerjaan cepat dan transaksi otomatis 24 jam</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Aman Terpercaya</h3>
+                    <p>Transaksi aman dengan sistem pembayaran terpercaya</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Layanan Pelanggan</h3>
+                    <p>Customer service siap membantu 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <h2>Produk Kami</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/250/200" alt="Top Up Game">
+                    </div>
+                    <div class="product-info">
+                        <h3>Top Up Game</h3>
+                        <div class="product-price">Mulai Dari Rp1.000</div>
+                        <a href="#" class="product-btn">Beli Sekarang</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/250/200" alt="Voucher Aplikasi">
+                    </div>
+                    <div class="product-info">
+                        <h3>Voucher Aplikasi</h3>
+                        <div class="product-price">Mulai Dari Rp5.000</div>
+                        <a href="#" class="product-btn">Beli Sekarang</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/250/200" alt="Pulsa & Data">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pulsa & Paket Data</h3>
+                        <div class="product-price">Mulai Dari Rp5.000</div>
+                        <a href="#" class="product-btn">Beli Sekarang</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/250/200" alt="E-Money">
+                    </div>
+                    <div class="product-info">
+                        <h3>E-Money</h3>
+                        <div class="product-price">Mulai Dari Rp50.000</div>
+                        <a href="#" class="product-btn">Beli Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Testimoni Pelanggan</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Pelayanan cepat dan ramah. Produk langsung masuk ke akun setelah pembayaran. Sangat recomended!"</p>
+                    <p class="testimonial-author">- Ahmad S.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Sudah berlangganan sejak 2019, tidak pernah mengecewakan. Selalu menjadi pilihan utama untuk top up game."</p>
+                    <p class="testimonial-author">- Dinda R.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"CS nya sangat responsif dan membantu, masalah saya langsung diselesaikan dengan cepat. Thank you Tsukoyomi Store!"</p>
+                    <p class="testimonial-author">- Budi P.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tsukoyomi Store .Ltd</h3>
+                    <p>Penyedia produk digital terpercaya sejak 2019. Melayani berbagai kebutuhan digital Anda dengan cepat dan aman.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Kategori Produk</h3>
+                    <ul>
+                        <li><a href="#">Top Up Game</a></li>
+                        <li><a href="#">Voucher Aplikasi</a></li>
+                        <li><a href="#">Pulsa & Paket Data</a></li>
+                        <li><a href="#">E-Money</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Informasi</h3>
+                    <ul>
+                        <li><a href="#">Cara Pembelian</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li><a href="#">WhatsApp: +62 877-3427-6016</a></li>
+                        <li><a href="#">Email: cs@tsukoyomistore.ltd</a></li>
+                        <li><a href="#">Instagram: @tsukoyomistore.ltd</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tsukoyomi Store .Ltd - Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Side Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sideMenu = document.querySelector('.side-menu');
+            const overlay = document.querySelector('.overlay');
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            
+            // Menu toggle
+            menuToggle.addEventListener('click', function() {
+                sideMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = sideMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Close menu when clicking on overlay
+            overlay.addEventListener('click', function() {
+                sideMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Dropdown toggle
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const dropdownMenu = this.nextElementSibling;
+                    dropdownMenu.classList.toggle('show');
+                });
+            });
+            
+            // Image Slider Script
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            
+            let currentSlide = 0;
+            const slideCount = slides.length;
+            
+            // Set initial position
+            updateSlider();
+            
+            // Auto slide every 5 seconds
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Next slide function
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                updateSlider();
+            }
+            
+            // Previous slide function
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                updateSlider();
+            }
+            
+            // Update slider position and active dot
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // Reset interval timer when slide changes
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Event listeners for buttons
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // Event listeners for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                });
+            });
+            
+            // Pause auto-sliding when hovering over slider
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            sliderContainer.addEventListener('mouseleave', () => {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
